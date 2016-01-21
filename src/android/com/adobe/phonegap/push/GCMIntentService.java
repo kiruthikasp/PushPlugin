@@ -459,9 +459,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
             soundname = extras.getString(SOUND);
         }
         if (soundpath != null) {
-           Uri sound = Uri.parse(soundpath);
-            Log.d(LOG_TAG, sound.toString());
-            mBuilder.setSound(sound);
+            mBuilder.setSound(soundpath.toString());
         }
         if (SOUND_RINGTONE.equals(soundname)) {
             mBuilder.setSound(android.provider.Settings.System.DEFAULT_RINGTONE_URI);
