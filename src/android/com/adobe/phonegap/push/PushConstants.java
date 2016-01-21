@@ -9,8 +9,8 @@ public interface PushConstants {
     public static final String PUSH_BUNDLE = "pushBundle";
     public static final String ICON = "icon";
     public static final String ICON_COLOR = "iconColor";
-    public static final String SOUND_PATH = "soundPath";
     public static final String SOUND = "sound";
+    public static final String SOUNDPATH = "soundpath";
     public static final String SOUND_DEFAULT = "default";
     public static final String SOUND_RINGTONE = "ringtone";
     public static final String VIBRATE = "vibrate";
@@ -43,7 +43,6 @@ public interface PushConstants {
     public static final String EXIT = "exit";
     public static final String FINISH = "finish";
     public static final String HAS_PERMISSION = "hasPermission";
-    public static final String SETTINGS = "settings";
     public static final String ANDROID = "android";
     public static final String SENDER_ID = "senderID";
     public static final String CLEAR_NOTIFICATIONS = "clearNotifications";

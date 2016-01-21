@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.media.RingtoneManager;
 
 import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.iid.InstanceID;
@@ -116,6 +115,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                             Log.d(LOG_TAG, "no iconColor option");
                         }
                         editor.putBoolean(SOUND, jo.optBoolean(SOUND, true));
+                        editor.putBoolean(SOUNDPATH, jo.optBoolean(SOUNDPATH, true));
                         editor.putBoolean(VIBRATE, jo.optBoolean(VIBRATE, true));
                         editor.putBoolean(CLEAR_NOTIFICATIONS, jo.optBoolean(CLEAR_NOTIFICATIONS, true));
                         editor.putBoolean(FORCE_SHOW, jo.optBoolean(FORCE_SHOW, false));
@@ -147,6 +147,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                             // Remove shared prefs
                             SharedPreferences.Editor editor = sharedPref.edit();
                             editor.remove(SOUND);
+                            editor.remove(SOUNDPATH);
                             editor.remove(VIBRATE);
                             editor.remove(CLEAR_NOTIFICATIONS);
                             editor.remove(FORCE_SHOW);
@@ -180,9 +181,13 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                     }
                 }
             });
-        } else if (SETTINGS.equals(action)) {
-         Intent intent = new Intent(this, RingtonePickerActivity.class);
-        startActivity(intent);
+        } else {
+            Log.e(LOG_TAG, "Invalid action : " + action);
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
+            return false;
+        }
+
+        return true;
     }
 
     public static void sendEvent(JSONObject _json) {
@@ -292,7 +297,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
 
             // Add any keys that need to be in top level json to this set
             HashSet<String> jsonKeySet = new HashSet();
-            Collections.addAll(jsonKeySet, TITLE,MESSAGE,COUNT,SOUND,IMAGE);
+            Collections.addAll(jsonKeySet, TITLE,MESSAGE,COUNT,SOUND,SOUNDPATH,IMAGE);
 
             Iterator<String> it = extras.keySet().iterator();
             while (it.hasNext()) {

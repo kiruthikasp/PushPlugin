@@ -64,29 +64,8 @@ var PushNotification = function(options) {
 };
 
 /**
- * Setting tone for push notifications
+ * Unregister from push notifications
  */
-
-PushNotification.prototype.settings = function (successCallback, errorCallback) {
-    if (errorCallback == null) {
-        errorCallback = function () {}
-    }
-    if (successCallback == null) {
-        successCallback = function () {}
-    }
-
-    if (typeof errorCallback != "function") {
-        console.log("PushNotification.showPushSettings failure: failure parameter not a function");
-        return;
-    }
-
-    if (typeof successCallback != "function") {
-        console.log("PushNotification.showPushSettings failure: success callback parameter must be a function");
-        return;
-    }
-
-    exec(successCallback, errorCallback, "PushNotification", "settings", []);
-};
 
 PushNotification.prototype.unregister = function(successCallback, errorCallback, options) {
     if (!errorCallback) { errorCallback = function() {}; }
