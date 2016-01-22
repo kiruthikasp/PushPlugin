@@ -37,24 +37,61 @@ Cursor mcursor;
 Intent Mringtone;
 String title;
 
+@Override
+protected void onDestroy() {
+// TODO Auto-generated method stub
+super.onDestroy();
+if (rt.isPlaying()) {
+rt.stop();
+} else {
+
+}
+}
+
+@Override
+protected void onPause() {
+// TODO Auto-generated method stub
+super.onPause();
+
+}
+
 /** Called when the activity is first created. */
 @Override
 public void onCreate(Bundle savedInstanceState) {
 super.onCreate(savedInstanceState);
-setContentView(R.layout.picker);
+setContentView(R.layout.main);
 
 //the following appends the cursor with the cursor that is used when the ringtone picker pops up
 mRingtoneManager = new RingtoneManager(this);
 mcursor = mRingtoneManager.getCursor();
 title = mRingtoneManager.EXTRA_RINGTONE_TITLE;
 
-Cursor myCursor = myRingtoneManager.getCursor();
-
-
 text = (TextView)findViewById(R.id.textadd);
 button1 = (Button)findViewById(R.id.button01);
 button1.setOnClickListener(this);
+}
 
+//adds a menu item from the res/menu/menu.xml
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+MenuInflater inflater = getMenuInflater();
+inflater.inflate(R.menu.menu, menu);
+return true;
+}
+
+//adds an action to the button click
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+switch (item.getItemId()) {
+case R.id.item1:
+if (rt.isPlaying()) {
+rt.stop();
+}
+finish();
+break;
+}
+return true;
+}
 
 @Override
 public void onClick(View arg0) {
@@ -68,7 +105,7 @@ Mringtone.putExtra(mRingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RI
 //gives the title of the RingtoneManager picker title
 Mringtone.putExtra(mRingtoneManager.EXTRA_RINGTONE_TITLE, "This is the title Of Your Picker!");
 
-//returns true shows the rest of the songs on the device in the default location
+//returns true shows the rest of the song on the device in the default location
 Mringtone.getBooleanExtra(mRingtoneManager.EXTRA_RINGTONE_INCLUDE_DRM, true);
 
 String uri = null;
@@ -79,8 +116,8 @@ Mringtone.putExtra(mRingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Uri.parse( uri 
 Mringtone.putExtra(mRingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri)null);
 }
 
-
 startActivityForResult(Mringtone, 0);
+
 
 }
 
@@ -125,9 +162,6 @@ break;
 }
 
 
-play(uri);
-
-
 //this method captures the ringtone from the selection and plays it in the main activity
 private void play(Uri uri) {
 // TODO Auto-generated method stub
@@ -138,4 +172,7 @@ rt = mRingtoneManager.getRingtone(this, uri);
 rt.play();
 
 }
+}
+
+
 }
