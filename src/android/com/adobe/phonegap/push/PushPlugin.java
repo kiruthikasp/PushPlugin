@@ -190,8 +190,8 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_ALARM);
-            startActivityForResult( intent, 999);
-            Uri ringtone = Uri.parse(data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI));
+            startActivity( intent, 999);
+            String ringtone = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
         }else {
             Log.e(LOG_TAG, "Invalid action : " + action);
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
