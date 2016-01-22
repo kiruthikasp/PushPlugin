@@ -80,10 +80,6 @@ Mringtone.putExtra(mRingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri)null);
 }
 
 
-
-Now we need to finish this method off by closing it with startActivity(intent);, but this will be different then other Intents because we want to get the data from this Intent so we can use it elsewhere. In this case, we want to get the data and set the default ringtone. So now lets close this onClick method and start the Activity:
-
-
 startActivityForResult(Mringtone, 0);
 
 }
