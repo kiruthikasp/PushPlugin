@@ -453,16 +453,16 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         }
     }
 
-    private void setNotificationSound(Context context, Bundle extras, NotificationCompat.Builder mBuilder) {
+   private void setNotificationSound(Context context, Bundle extras, NotificationCompat.Builder mBuilder) {
         String soundname = extras.getString(SOUNDNAME);
         if (soundname == null) {
             soundname = extras.getString(SOUND);
         }
-       
         if (SOUND_RINGTONE.equals(soundname)) {
             mBuilder.setSound(android.provider.Settings.System.DEFAULT_RINGTONE_URI);
         } else if (soundname != null && !soundname.contentEquals(SOUND_DEFAULT)) {
-            Uri sound = Uri.parse(soundpath);
+            Uri sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
+                    + "://" + context.getPackageName() + "/raw/" + soundname);
             Log.d(LOG_TAG, sound.toString());
             mBuilder.setSound(sound);
         } else {
