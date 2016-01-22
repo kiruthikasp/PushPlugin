@@ -18,6 +18,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
+import android.net.Uri;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -190,7 +191,6 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_ALARM);
-            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, currenturi);
             this.startActivityForResult( intent, 999);  
             
         }else {
@@ -205,7 +205,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
 @Override
  public void onActivityResult( int requestCode,  int resultCode,  Intent intent)
  {
-     if (resultCode == Activity.RESULT_OK && requestCode == 999)
+     if ( requestCode == 999)
      {
           Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
       }            
