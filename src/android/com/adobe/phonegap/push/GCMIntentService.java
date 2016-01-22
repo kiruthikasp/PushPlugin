@@ -461,7 +461,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         }
         if (soundpath != null) {
             Uri snd = Uri.parse(soundpath);
-            console.log(snd.toString());
+            Log.d(LOG_TAG, sound.toString());
             mBuilder.setSound(snd);
         }
         if (SOUND_RINGTONE.equals(soundname)) {
