@@ -41,7 +41,7 @@ String title;
 @Override
 public void onCreate(Bundle savedInstanceState) {
 super.onCreate(savedInstanceState);
-setContentView(R.layout.main);
+setContentView(R.layout.picker);
 
 //the following appends the cursor with the cursor that is used when the ringtone picker pops up
 mRingtoneManager = new RingtoneManager(this);
