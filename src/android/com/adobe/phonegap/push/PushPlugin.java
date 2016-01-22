@@ -190,8 +190,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_ALARM);
-            startActivity( intent, 999);
-            String ringtone = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+            this.startActivityForResult( intent, 999);  
         }else {
             Log.e(LOG_TAG, "Invalid action : " + action);
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
@@ -201,7 +200,26 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
         return true;
     }
     
+@Override
+public void onActivityResult(int requestCode, int resultCode) {
 
+    if (resultCode != RESULT_OK) {
+
+    return;
+    }
+
+    if (requestCode == 999) {
+
+        Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+        Toast.makeText(getApplicationContext(), "No Ringtone Path Found!", Toast.LENGTH_LONG).show();
+    }
+
+    else 
+    {
+        Toast.makeText(getApplicationContext(), "Request Code is Bad", Toast.LENGTH_LONG).show();
+    }
+
+}
     public static void sendEvent(JSONObject _json) {
         PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, _json);
         pluginResult.setKeepCallback(true);
