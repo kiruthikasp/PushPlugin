@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
 
 import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.iid.InstanceID;
@@ -197,6 +199,23 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
 
         return true;
     }
+    
+    @Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (resultCode == RESULT_OK) {
+        switch (requestCode) {
+        case 1:
+            ringtone = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+
+            // Toast.makeText(getBaseContext(),RingtoneManager.URI_COLUMN_INDEX,
+            // Toast.LENGTH_SHORT).show();
+            break;
+
+        default:
+            break;
+        }
+    }
+}
 
     public static void sendEvent(JSONObject _json) {
         PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, _json);
