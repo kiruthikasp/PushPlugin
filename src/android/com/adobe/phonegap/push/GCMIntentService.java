@@ -461,6 +461,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         }
         if (soundpath != null) {
             Uri snd = Uri.parse(soundpath);
+            console.log(snd.toString());
             mBuilder.setSound(snd);
         }
         if (SOUND_RINGTONE.equals(soundname)) {
@@ -468,7 +469,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         } else if (soundname != null && !soundname.contentEquals(SOUND_DEFAULT)) {
             Uri sound = Uri.parse(soundpath);
             Log.d(LOG_TAG, sound.toString());
-            sound.play();
+            mBuilder.setSound(sound);
         } else {
             mBuilder.setSound(android.provider.Settings.System.DEFAULT_NOTIFICATION_URI);
         }
