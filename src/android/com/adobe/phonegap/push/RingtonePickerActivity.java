@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class Ringtones extends Activity implements OnClickListener{
+public class RingtonePickerActivity extends Activity implements OnClickListener{
 
 Ringtone rt;
 RingtoneManager mRingtoneManager;
