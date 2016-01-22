@@ -115,9 +115,6 @@ PushNotification.prototype.setApplicationIconBadgeNumber = function(successCallb
     exec(successCallback, errorCallback, 'PushNotification', 'setApplicationIconBadgeNumber', [{badge: badge}]);
 };
 
-/**
- * Get the application icon badge
- */
 
 PushNotification.prototype.getApplicationIconBadgeNumber = function(successCallback, errorCallback) {
     if (!errorCallback) { errorCallback = function() {}; }
@@ -133,6 +130,26 @@ PushNotification.prototype.getApplicationIconBadgeNumber = function(successCallb
     }
 
     exec(successCallback, errorCallback, 'PushNotification', 'getApplicationIconBadgeNumber', []);
+};
+
+/**
+ * Get the application icon badge
+ */
+
+PushNotification.prototype.select = function(successCallback, errorCallback) {
+    if (!errorCallback) { errorCallback = function() {}; }
+
+    if (typeof errorCallback !== 'function')  {
+        console.log('PushNotification.select failure: failure parameter not a function');
+        return;
+    }
+
+    if (typeof successCallback !== 'function') {
+        console.log('PushNotification.select failure: success callback parameter must be a function');
+        return;
+    }
+
+    exec(successCallback, errorCallback, 'PushNotification', 'select', []);
 };
 
 /**
