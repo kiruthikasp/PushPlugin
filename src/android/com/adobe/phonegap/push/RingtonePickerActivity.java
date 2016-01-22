@@ -1,5 +1,32 @@
 package com.adobe.phonegap.push;
 
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.content.Context;
+import android.content.Intent;
+import android.media.RingtoneManager;
+
+import com.google.android.gms.gcm.GcmPubSub;
+import com.google.android.gms.iid.InstanceID;
+
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
+import org.apache.cordova.PluginResult;
+import org.json.JSONArray;
+import android.net.Uri;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+
 public class Ringtones extends Activity implements OnClickListener{
 
 Ringtone rt;
