@@ -186,12 +186,14 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                 }
             });
         } else if (SELECT.equals(action)){
-            Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
-            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select ringtone for notifications:");
-            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
-            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
-            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_ALARM);
-            this.startActivityForResult( intent, 999);  
+            // Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+            // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select ringtone for notifications:");
+            // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
+            // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
+            // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_ALARM);
+            // this.startActivityForResult( intent, 999);  
+            Intent i = new Intent(this, RingtonePickerActivity.class);
+            startActivity(i);
             
         }else {
             Log.e(LOG_TAG, "Invalid action : " + action);
