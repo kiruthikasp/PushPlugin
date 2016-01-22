@@ -2,6 +2,7 @@ package com.adobe.phonegap.push;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.media.MediaPlayer;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
@@ -459,13 +460,14 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
             soundname = extras.getString(SOUND);
         }
         if (soundpath != null) {
-            mBuilder.setSound(soundpath);
+            Uri snd = Uri.parse(soundpath);
+            Log.d(LOG_TAG, snd.toString());
+            mBuilder.setSound(snd);
         }
         if (SOUND_RINGTONE.equals(soundname)) {
             mBuilder.setSound(android.provider.Settings.System.DEFAULT_RINGTONE_URI);
         } else if (soundname != null && !soundname.contentEquals(SOUND_DEFAULT)) {
-            Uri sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
-                    + "://" + context.getPackageName() + "/raw/" + soundname);
+            Uri sound = Uri.parse(soundpath);
             Log.d(LOG_TAG, sound.toString());
             mBuilder.setSound(sound);
         } else {
