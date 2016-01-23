@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="about_name">false</item>
+    <item type="id" name="about_version">false</item>
+    <item type="id" name="about_text">false</item>
+    <item type="id" name="progressContainer">false</item>
+    <item type="id" name="listContainer">false</item>
+    <item type="id" name="okayButton">false</item>
+    <item type="id" name="cancelButton">false</item>
+    <item type="id" name="picker_title">false</item>
+    <item type="id" name="picker_item_icon">false</item>
+    <item type="id" name="picker_item_text">false</item>
+    <item type="id" name="picker_item_info">false</item>
+    <item type="id" name="splash_title">false</item>
+    <item type="id" name="splash_body">false</item>
+    <item type="id" name="splash_button_ringtone">false</item>
+    <item type="id" name="splash_button_notification">false</item>
+    <item type="id" name="splash_button_ok">false</item>
+    <item type="id" name="volume_ringer">false</item>
+    <item type="id" name="volume_text_ringer">false</item>
+    <item type="id" name="volume_music">false</item>
+    <item type="id" name="volume_text_music">false</item>
+    <item type="id" name="volume_call">false</item>
+    <item type="id" name="volume_text_call">false</item>
+    <item type="id" name="volume_system">false</item>
+    <item type="id" name="volume_text_system">false</item>
+    <item type="id" name="volume_alarm">false</item>
+    <item type="id" name="volume_text_alarm">false</item>
+    <item type="id" name="radio">false</item>
+    <item type="id" name="duration">false</item>
+    <item type="id" name="line1">false</item>
+    <item type="id" name="line2">false</item>
+    <item type="id" name="play_indicator">false</item>
+</resources>
