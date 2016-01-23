@@ -195,8 +195,8 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                 }
             });
         } else if (SELECT.equals(action)){
-            cordova.getThreadPool().execute(new Runnable() {
-                public void run() {
+            cordova.getActivity().execute(new Runnable() {
+            public void run() {
             // Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
             // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select ringtone for notifications:");
             // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
@@ -206,13 +206,13 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
         try {  
             //Context context=this.cordova.getActivity().getApplicationContext();
             //or Context context=cordova.getActiivity().getApplicationContext();
-           // this.setActivityResultCallback(this); 
+            this.cordova.setActivityResultCallback(this); 
             Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_NOTIFICATION | RingtoneManager.TYPE_RINGTONE);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-            startActivityForResult(intent, 999);
+            this.cordova.getActivity().startActivityForResult(intent, 999);
             callbackContext.success();
         } catch (UnknownError e) {
             callbackContext.error(e.getMessage());
