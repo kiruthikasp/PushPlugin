@@ -80,7 +80,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:icon="@drawable/tonepicker" android:label="@string/musicPickerName" android:name="com.adobe.phonegap.push.MusicPicker">
+        <activity android:icon="@drawable/tonepicker" android:label="@string/musicPickerName" android:name="com.example.android.rings_extended.MusicPicker">
             <intent-filter>
                 <action android:name="android.intent.action.GET_CONTENT"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -106,7 +106,6 @@
 	<source-file src="src/android/com/adobe/phonegap/push/PushConstants.java" target-dir="src/com/adobe/phonegap/push/" />
 	<source-file src="src/android/com/adobe/phonegap/push/PushHandlerActivity.java" target-dir="src/com/adobe/phonegap/push/" />
 	<source-file src="src/android/com/adobe/phonegap/push/PushInstanceIDListenerService.java" target-dir="src/com/adobe/phonegap/push/" />
-	<source-file src="src/android/com/adobe/phonegap/push/MusicPicker.java" target-dir="src/com/adobe/phonegap/push/" />
 	<source-file src="src/android/com/adobe/phonegap/push/PushPlugin.java" target-dir="src/com/adobe/phonegap/push/" />
         <source-file src="src/android/com/adobe/phonegap/push/RegistrationIntentService.java" target-dir="src/com/adobe/phonegap/push/" />
         <source-file src="src/android/com/adobe/phonegap/push/PermissionUtils.java" target-dir="src/com/adobe/phonegap/push/" />
