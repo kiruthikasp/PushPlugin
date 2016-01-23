@@ -195,8 +195,6 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                 }
             });
         } else if (SELECT.equals(action)){
-            cordova.getActivity().execute(new Runnable() {
-            public void run() {
             // Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
             // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select ringtone for notifications:");
             // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
@@ -217,8 +215,6 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
         } catch (UnknownError e) {
             callbackContext.error(e.getMessage());
         } 
-                }
-            });
         }else {
             Log.e(LOG_TAG, "Invalid action : " + action);
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
@@ -235,10 +231,9 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
      if ( requestCode == 999)
      {
           Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-        //   SharedPreferences.Editor editor = sharedPref.edit();
-        //   editor.putString(SOUNDPATH,uri.toString());
-        String str = uri.toString();
-        
+          String str = uri.toString();
+          SharedPreferences.Editor editor = sharedPref.edit();
+          editor.putString(SOUNDPATH,uri.toString());
       }            
   }
     public static void sendEvent(JSONObject _json) {
