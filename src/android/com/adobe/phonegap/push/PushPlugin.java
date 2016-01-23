@@ -239,8 +239,6 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
           SharedPreferences.Editor editor = sharedPref.edit();
           editor.putString(SOUNDPATH,uri.toString());
           editor.commit();
-          Toast toast = Toast.makeText(context, uri, 3000);
-          toast.show();
       }            
   }
     public static void sendEvent(JSONObject _json) {
