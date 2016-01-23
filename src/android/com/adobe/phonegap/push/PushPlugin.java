@@ -204,14 +204,14 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
         try {  
             Context context=this.cordova.getActivity().getApplicationContext();
             //or Context context=cordova.getActiivity().getApplicationContext();
-            cordova.setActivityResultCallback (this); 
+            cordova.setActivityResultCallback(this); 
             Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_NOTIFICATION | RingtoneManager.TYPE_RINGTONE);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             this.cordova.getActivity().startActivityForResult(intent, 999);
-            
+            callbackContext.success();
         } catch (UnknownError e) {
             callbackContext.error(e.getMessage());
         } 
@@ -233,7 +233,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
           Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
         //   SharedPreferences.Editor editor = sharedPref.edit();
         //   editor.putString(SOUNDPATH,uri.toString());
-        callbackContext.success(uri.toString());
+        
       }            
   }
     public static void sendEvent(JSONObject _json) {
