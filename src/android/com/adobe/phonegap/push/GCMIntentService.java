@@ -117,8 +117,6 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
             return COUNT;
         } else if (key.equals(SOUNDNAME)) {
             return SOUND;
-        }else if (key.equals(SOUNDPATH)) {
-            return SOUNDPATH;
         }else if (key.startsWith(GCM_NOTIFICATION)) {
             return key.substring(GCM_NOTIFICATION.length()+1, key.length());
         } else if (key.startsWith(GCM_N)) {
@@ -251,6 +249,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         Log.d(LOG_TAG, "stored icon=" + localIcon);
         Log.d(LOG_TAG, "stored iconColor=" + localIconColor);
         Log.d(LOG_TAG, "stored sound=" + soundOption);
+        Log.d(LOG_TAG, "stored sound=" + soundpath);
         Log.d(LOG_TAG, "stored vibrate=" + vibrateOption);
 
         /*
@@ -464,12 +463,14 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         }
         if (SOUND_RINGTONE.equals(soundname)) {
             mBuilder.setSound(android.provider.Settings.System.DEFAULT_RINGTONE_URI);
-        } else if(soundpath != null){
-            Uri snd = Uri.parse(soundpath);
-            mBuilder.setSound(snd);
-        }else if (soundname != null && !soundname.contentEquals(SOUND_DEFAULT)) {
+        }
+        // else if(soundpath != null){
+        //     Uri snd = Uri.parse(soundpath);
+        //     mBuilder.setSound(snd);}
+        else if (soundname != null && !soundname.contentEquals(SOUND_DEFAULT)) {
             Uri sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
                     + "://" + context.getPackageName() + "/raw/" + soundname);
+            Log.d(LOG_TAG, soundpath);
             Log.d(LOG_TAG, sound.toString());
             mBuilder.setSound(sound);
         } else {
