@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
@@ -232,6 +233,9 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
      {
           Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
           String str = uri.toString();
+          Context context=this.cordova.getActivity().getApplicationContext();
+          Toast toast = Toast.makeText(context, str, 3000);
+          toast.show()
           SharedPreferences.Editor editor = sharedPref.edit();
           editor.putString(SOUNDPATH,uri.toString());
       }            
