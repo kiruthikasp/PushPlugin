@@ -235,7 +235,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
           String str = uri.toString();
           Context context=this.cordova.getActivity().getApplicationContext();
           Toast toast = Toast.makeText(context, str, 3000);
-          toast.show()
+          toast.show();
           SharedPreferences.Editor editor = sharedPref.edit();
           editor.putString(SOUNDPATH,uri.toString());
       }            
