@@ -229,6 +229,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
 @Override
  public void onActivityResult( int requestCode,  int resultCode,  Intent intent)
  {
+     SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(COM_ADOBE_PHONEGAP_PUSH, Context.MODE_PRIVATE);
      if ( requestCode == 999)
      {
           Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
