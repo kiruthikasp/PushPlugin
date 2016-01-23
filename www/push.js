@@ -136,10 +136,20 @@ PushNotification.prototype.getApplicationIconBadgeNumber = function(successCallb
  * Get the application icon badge
  */
 
-PushNotification.prototype.select = function(successCallback, errorCallback, options) {
-    
+PushNotification.prototype.select = function(successCallback, errorCallback, data) {
+    if (!errorCallback) { errorCallback = function() {}; }
 
-    exec(successCallback, errorCallback, 'PushNotification', 'select', [options]);
+    if (typeof errorCallback !== 'function')  {
+        console.log('PushNotification.select failure: failure parameter not a function');
+        return;
+    }
+
+    if (typeof successCallback !== 'function') {
+        console.log('PushNotification.select failure: success callback parameter must be a function');
+        return;
+    }
+
+    exec(successCallback, errorCallback, 'PushNotification', 'select', [{data:data}]);
 };
 
 /**
