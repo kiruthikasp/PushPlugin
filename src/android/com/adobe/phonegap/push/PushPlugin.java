@@ -233,6 +233,9 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
           Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
         //   SharedPreferences.Editor editor = sharedPref.edit();
         //   editor.putString(SOUNDPATH,uri.toString());
+        String str = uri.toString();
+        PluginResult result = new PluginResult(PluginResult.Status.OK, str);
+        callbackContext.sendPluginResult(result);
         
       }            
   }
