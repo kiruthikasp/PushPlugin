@@ -234,11 +234,11 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
           Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
           String str = uri.toString();
           Context context=this.cordova.getActivity().getApplicationContext();
+          SharedPreferences.Editor editor = sharedPref.edit();
+          editor.putString("soundpath",str);
+          editor.commit();
           Toast toast = Toast.makeText(context, str, 3000);
           toast.show();
-          SharedPreferences.Editor editor = sharedPref.edit();
-          editor.putString(SOUNDPATH,uri.toString());
-          editor.commit();
       }            
   }
     public static void sendEvent(JSONObject _json) {
