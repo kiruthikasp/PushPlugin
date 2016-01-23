@@ -67,7 +67,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                     SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(COM_ADOBE_PHONEGAP_PUSH, Context.MODE_PRIVATE);
                     String token = null;
                     String senderID = null;
-                    Uri soundpath = null;
+                    String soundpath = null;
 
                     try {
                         jo = data.getJSONObject(0).getJSONObject(ANDROID);
@@ -232,6 +232,8 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
      if ( requestCode == 999)
      {
           Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+           SharedPreferences.Editor editor = sharedPref.edit();
+           editor.putString(SOUNDPATH,uri.toString());
       }            
   }
     public static void sendEvent(JSONObject _json) {
