@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.widget.Toast;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
@@ -250,6 +251,8 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         Log.d(LOG_TAG, "stored iconColor=" + localIconColor);
         Log.d(LOG_TAG, "stored sound=" + soundOption);
         Log.d(LOG_TAG, "stored vibrate=" + vibrateOption);
+        Toast toast = Toast.makeText(context, soundpath, 3000);
+        toast.show();
 
         /*
          * Notification Vibration
@@ -457,6 +460,8 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
    private void setNotificationSound(Context context, Bundle extras, NotificationCompat.Builder mBuilder) {
         String soundname = extras.getString(SOUNDNAME);
         String soundpath = extras.getString(SOUNDPATH);
+        Toast toast = Toast.makeText(context, soundpath, 3000);
+          toast.show();
         if (soundname == null) {
             soundname = extras.getString(SOUND);
         }
