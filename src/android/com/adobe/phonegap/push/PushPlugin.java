@@ -200,7 +200,12 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
             // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_ALARM);
             // this.startActivityForResult( intent, 999);  
-           viewChange();
+            Context context=this.cordova.getActivity().getApplicationContext();
+            //or Context context=cordova.getActivity().getApplicationContext();
+            Intent intent=new Intent(context,RingtonePickerActivity.class);
+        
+            context.startActivity(intent);
+            //or cordova.getActivity().startActivity(intent);
             
         }else {
             Log.e(LOG_TAG, "Invalid action : " + action);
@@ -210,12 +215,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
 
         return true;
     }
-    @Override
-     public void viewChange(View view) {
-      Intent i = new Intent(this, RingtonePickerActivity.class);
-      this.startActivity(i);
-    }
-            
+   
 @Override
  public void onActivityResult( int requestCode,  int resultCode,  Intent intent)
  {
