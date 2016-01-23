@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView android:textSize="18.0sp" android:gravity="center" android:id="@id/about_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/app_description" />
-    <TextView android:textSize="10.0sp" android:gravity="center" android:id="@id/about_version" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/app_version" />
-    <TextView android:textSize="14.0sp" android:gravity="center" android:id="@id/about_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/app_about" />
-</LinearLayout>
