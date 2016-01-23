@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.database.Cursor;
 import android.view.Menu;
 import android.os.Bundle;
-import android.R;
+import com.pinnacle.hr.R;
 
 public class RingtonePickerActivity extends Activity {
 
