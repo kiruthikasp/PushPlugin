@@ -194,6 +194,9 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                 }
             });
         } else if (SELECT.equals(action)){
+             cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    try {
             // Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
             // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select ringtone for notifications:");
             // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
@@ -209,9 +212,15 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             cordova.getActivity().startActivityForResult(intent, 999);
-        
+            callbackContext.success();
+                    } catch (UnknownError e) {
+                        callbackContext.error(e.getMessage());
+                    } catch (JSONException e) {
+                        callbackContext.error(e.getMessage());
+                    }
             //or cordova.getActivity().startActivity(intent);
-            
+                }
+            });
         }else {
             Log.e(LOG_TAG, "Invalid action : " + action);
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
