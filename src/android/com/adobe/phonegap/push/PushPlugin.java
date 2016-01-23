@@ -204,14 +204,14 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_ALARM);
             // this.startActivityForResult( intent, 999);  
             Context context=this.cordova.getActivity().getApplicationContext();
-            //or Context context=cordova.getActivity().getApplicationContext();
-            cordova.setActivityResultCallback (this); 
+            //or Context context=cordova.getActiivity().getApplicationContext();
+            this.cordova.setActivityResultCallback (this); 
             Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_NOTIFICATION | RingtoneManager.TYPE_RINGTONE);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-            cordova.getActivity().startActivityForResult(intent, 999);
+            this.cordova.getActivity().startActivityForResult(intent, 999);
             callbackContext.success();
                     } catch (UnknownError e) {
                         callbackContext.error(e.getMessage());
