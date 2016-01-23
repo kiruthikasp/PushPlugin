@@ -74,6 +74,28 @@
                 android:name="com.adobe.phonegap.push.RegistrationIntentService"
                 android:exported="false">
             </service>
+            <activity android:icon="@drawable/tonepicker" android:label="@string/app_name" android:name=".TonePicker">
+            <intent-filter>
+                <action android:name="android.intent.action.RINGTONE_PICKER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:icon="@drawable/tonepicker" android:label="@string/musicPickerName" android:name="com.example.android.rings_extended.MusicPicker">
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.OPENABLE"/>
+                <data android:mimeType="audio/*"/>
+                <data android:mimeType="application/ogg"/>
+                <data android:mimeType="application/x-ogg"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PICK"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.OPENABLE"/>
+                <data android:mimeType="vnd.android.cursor.dir/audio"/>
+            </intent-filter>
+        </activity>
 		</config-file>
 
         <framework src="push.gradle" custom="true" type="gradleReference" />
