@@ -117,7 +117,9 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
             return COUNT;
         } else if (key.equals(SOUNDNAME)) {
             return SOUND;
-        } else if (key.startsWith(GCM_NOTIFICATION)) {
+        }else if (key.equals(SOUNDPATH)) {
+            return SOUNDPATH;
+        }else if (key.startsWith(GCM_NOTIFICATION)) {
             return key.substring(GCM_NOTIFICATION.length()+1, key.length());
         } else if (key.startsWith(GCM_N)) {
             return key.substring(GCM_N.length()+1, key.length());
@@ -243,6 +245,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         SharedPreferences prefs = context.getSharedPreferences(PushPlugin.COM_ADOBE_PHONEGAP_PUSH, Context.MODE_PRIVATE);
         String localIcon = prefs.getString(ICON, null);
         String localIconColor = prefs.getString(ICON_COLOR, null);
+        String soundpath = prefs.getString(SOUNDPATH, null);
         boolean soundOption = prefs.getBoolean(SOUND, true);
         boolean vibrateOption = prefs.getBoolean(VIBRATE, true);
         Log.d(LOG_TAG, "stored icon=" + localIcon);
@@ -455,12 +458,16 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
 
    private void setNotificationSound(Context context, Bundle extras, NotificationCompat.Builder mBuilder) {
         String soundname = extras.getString(SOUNDNAME);
+        String soundpath = extras.getString(SOUNDPATH);
         if (soundname == null) {
             soundname = extras.getString(SOUND);
         }
         if (SOUND_RINGTONE.equals(soundname)) {
             mBuilder.setSound(android.provider.Settings.System.DEFAULT_RINGTONE_URI);
-        } else if (soundname != null && !soundname.contentEquals(SOUND_DEFAULT)) {
+        } else if(soundpath != null){
+            Uri snd = Uri.parse(soundpath);
+            mBuilder.setSound(snd);
+        }else if (soundname != null && !soundname.contentEquals(SOUND_DEFAULT)) {
             Uri sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
                     + "://" + context.getPackageName() + "/raw/" + soundname);
             Log.d(LOG_TAG, sound.toString());

@@ -67,6 +67,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                     SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(COM_ADOBE_PHONEGAP_PUSH, Context.MODE_PRIVATE);
                     String token = null;
                     String senderID = null;
+                    Uri soundpath = null;
 
                     try {
                         jo = data.getJSONObject(0).getJSONObject(ANDROID);
@@ -127,7 +128,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                             Log.d(LOG_TAG, "no iconColor option");
                         }
                         editor.putBoolean(SOUND, jo.optBoolean(SOUND, true));
-                        editor.putBoolean(SOUNDPATH, jo.optBoolean(SOUNDPATH, true));
+                        editor.putString(SOUNDPATH, soundpath);
                         editor.putBoolean(VIBRATE, jo.optBoolean(VIBRATE, true));
                         editor.putBoolean(CLEAR_NOTIFICATIONS, jo.optBoolean(CLEAR_NOTIFICATIONS, true));
                         editor.putBoolean(FORCE_SHOW, jo.optBoolean(FORCE_SHOW, false));
@@ -199,7 +200,8 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
             // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
             // intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_ALARM);
-            // this.startActivityForResult( intent, 999);  
+            // this.startActivityForResult( intent, 999);
+        try {  
             Context context=this.cordova.getActivity().getApplicationContext();
             //or Context context=cordova.getActiivity().getApplicationContext();
             cordova.setActivityResultCallback (this); 
@@ -210,6 +212,11 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             this.cordova.getActivity().startActivityForResult(intent, 999);
             callbackContext.success();
+        } catch (UnknownError e) {
+            callbackContext.error(e.getMessage());
+        } catch (JSONException e) {
+            callbackContext.error(e.getMessage());
+        }
         }else {
             Log.e(LOG_TAG, "Invalid action : " + action);
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
