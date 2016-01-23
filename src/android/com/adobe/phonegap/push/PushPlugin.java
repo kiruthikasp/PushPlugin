@@ -214,9 +214,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             callbackContext.success();
         } catch (UnknownError e) {
             callbackContext.error(e.getMessage());
-        } catch (JSONException e) {
-            callbackContext.error(e.getMessage());
-        }
+        } 
         }else {
             Log.e(LOG_TAG, "Invalid action : " + action);
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));
