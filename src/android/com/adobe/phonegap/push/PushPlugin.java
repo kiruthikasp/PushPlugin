@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import java.io.File;
 import android.util.Log;
 import android.widget.Toast;
 import android.content.Context;
@@ -216,11 +217,14 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             this.cordova.getActivity().startActivityForResult(intent, 999);
-            // SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
-            // String s = sharedPref.getString("soundpath",null);
-            // callbackContext.success(s);
-             //Toast.makeText(this.cordova.getActivity().getApplicationContext(),"called",
-             //4000).show();
+            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
+            String s = sharedPref.getString("soundpath",null);
+            Uri u = Uri.parse(s);
+            File f = new File("" + u);
+            String r = f.getName();
+            callbackContext.success(r);
+            //  Toast.makeText(this.cordova.getActivity().getApplicationContext(),"called",
+            //  4000).show();
         } catch (UnknownError e) {
             callbackContext.error(e.getMessage());
         } 
@@ -234,7 +238,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
     }
    
 
- public void onActivityResult( int requestCode,  int resultCode,  Intent intent, CallbackContext callbackContext)
+ public void onActivityResult( int requestCode,  int resultCode,  Intent intent)
  {
      SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
      if ( requestCode == 999)
@@ -248,7 +252,6 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
               SharedPreferences.Editor editor = sharedPref.edit();
               editor.putString("soundpath",str);
               editor.commit();
-              callbackContext.success(str);
           }else{
              Toast.makeText(this.cordova.getActivity().getApplicationContext(), "No Ringtone Path Found!", 2500).show(); 
           }
