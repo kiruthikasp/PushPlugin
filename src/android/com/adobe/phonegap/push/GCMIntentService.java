@@ -459,8 +459,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         String soundname = extras.getString(SOUNDNAME);
         SharedPreferences prefs = getSharedPreferences(PushPlugin.MY_PREFS_NAME, MODE_PRIVATE); 
         String soundpath = prefs.getString(SOUNDPATH, null);
-        Toast toast = Toast.makeText(context, soundpath, 3000);
-        toast.show();
+
         if (soundname == null) {
             soundname = extras.getString(SOUND);
         }
