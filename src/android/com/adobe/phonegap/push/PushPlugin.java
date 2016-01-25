@@ -226,7 +226,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
     }
    
 
- public static onActivityResult( int requestCode,  int resultCode,  Intent intent)
+ public String onActivityResult( int requestCode,  int resultCode,  Intent intent)
  {
      SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
      if ( requestCode == 999)
@@ -241,7 +241,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
               editor.commit();
               return str;
           }
-          return false;
+          return null;
       }            
   }
     public static void sendEvent(JSONObject _json) {
