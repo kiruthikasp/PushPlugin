@@ -463,16 +463,14 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         String soundname = extras.getString(SOUNDNAME);
         SharedPreferences prefs = getSharedPreferences(PushPlugin.MY_PREFS_NAME, MODE_PRIVATE); 
         String path = prefs.getString("soundpath", null);
-        long ringDelay = 3500;
+        long ringDelay = 2000;
         // String soundpath = extras.getString(SOUNDPATH);
         if (soundname == null) {
             soundname = extras.getString(SOUND);
         }
         
         if(path != null){
-           Uri sound = Uri.parse(path);
-            Log.d(LOG_TAG, sound.toString());
-            mBuilder.setSound(sound);
+            Uri sound = Uri.parse(path);
             final Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), sound);
             r.play();
             TimerTask task = new TimerTask() {
