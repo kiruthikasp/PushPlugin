@@ -473,7 +473,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
            Uri sound = Uri.parse(path);
             Log.d(LOG_TAG, sound.toString());
             mBuilder.setSound(sound);
-            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), sound);
+            final Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), sound);
             r.play();
             TimerTask task = new TimerTask() {
                 @Override
