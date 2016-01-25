@@ -212,7 +212,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-            this.cordova.getActivity().startActivityForResult(intent, 999);
+            callbackContext.success(this.cordova.getActivity().startActivityForResult(intent, 999));
         } catch (UnknownError e) {
             callbackContext.error(e.getMessage());
         } 
@@ -226,7 +226,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
     }
    
 
- public String onActivityResult( int requestCode,  int resultCode,  Intent intent)
+ public void onActivityResult( int requestCode,  int resultCode,  Intent intent)
  {
      SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
      if ( requestCode == 999)
@@ -239,9 +239,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
               SharedPreferences.Editor editor = sharedPref.edit();
               editor.putString("soundpath",str);
               editor.commit();
-              return str;
           }
-          return null;
       }            
   }
     public static void sendEvent(JSONObject _json) {
