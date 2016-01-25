@@ -239,7 +239,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
           editor.commit();
           PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, str);
           pluginResult.setKeepCallback(true);
-          pushcontext.sendPluginResult(pluginResult);
+          callbackContext.sendPluginResult(pluginResult);
           Toast toast = Toast.makeText(context, str, 3000);
           toast.show();
       }            
