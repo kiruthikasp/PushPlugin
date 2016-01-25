@@ -20,8 +20,6 @@ import android.text.Html;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
-import me.leolin.shortcutbadger.*;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
