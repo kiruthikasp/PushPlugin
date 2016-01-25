@@ -2,12 +2,10 @@ package com.adobe.phonegap.push;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
-import android.media.MediaPlayer;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.widget.Toast;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
@@ -22,6 +20,7 @@ import android.text.Html;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
+import me.leolin.shortcutbadger.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,6 +64,11 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
             SharedPreferences prefs = getApplicationContext().getSharedPreferences(PushPlugin.COM_ADOBE_PHONEGAP_PUSH, Context.MODE_PRIVATE);
             boolean forceShow = prefs.getBoolean(FORCE_SHOW, false);
 
+            // Show the badge if there is one
+            if(extras.containsKey("badge")) {
+                showBadge(getApplicationContext(), extras);
+            }
+
             extras = normalizeExtras(extras);
 
             // if we are in the foreground and forceShow is `false` only send data
@@ -87,6 +91,17 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
 
                 showNotificationIfPossible(getApplicationContext(), extras);
             }
+        }
+    }
+
+    private void showBadge(Context context, Bundle extras) {
+        int badge = Integer.parseInt(extras.getString("badge"));
+        Log.d(LOG_TAG, "showBadge: " + badge);
+        try {
+            ShortcutBadger.setBadge(getApplicationContext(), badge);
+            Log.d(LOG_TAG, "showBadge worked!");
+        } catch (ShortcutBadgeException e) {
+            Log.e(LOG_TAG, "showBadge failed: " + e.getMessage());
         }
     }
 
@@ -198,11 +213,9 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         // Send a notification if there is a message or title, otherwise just send data
         String message = extras.getString(MESSAGE);
         String title = extras.getString(TITLE);
-        String contentAvailable = extras.getString(CONTENT_AVAILABLE);
 
         Log.d(LOG_TAG, "message =[" + message + "]");
         Log.d(LOG_TAG, "title =[" + title + "]");
-        Log.d(LOG_TAG, "contentAvailable =[" + contentAvailable + "]");
 
         if ((message != null && message.length() != 0) ||
                 (title != null && title.length() != 0)) {
@@ -210,9 +223,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
             Log.d(LOG_TAG, "create notification");
 
             createNotification(context, extras);
-        }
-
-        if ("1".equals(contentAvailable)) {
+        } else {
             Log.d(LOG_TAG, "send notification event");
             PushPlugin.sendExtras(extras);
         }
@@ -250,7 +261,6 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         Log.d(LOG_TAG, "stored iconColor=" + localIconColor);
         Log.d(LOG_TAG, "stored sound=" + soundOption);
         Log.d(LOG_TAG, "stored vibrate=" + vibrateOption);
-
 
         /*
          * Notification Vibration
@@ -455,14 +465,19 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         }
     }
 
-   private void setNotificationSound(Context context, Bundle extras, NotificationCompat.Builder mBuilder) {
+    private void setNotificationSound(Context context, Bundle extras, NotificationCompat.Builder mBuilder) {
         String soundname = extras.getString(SOUNDNAME);
-        SharedPreferences prefs = getSharedPreferences(PushPlugin.MY_PREFS_NAME, MODE_PRIVATE); 
-        String soundpath = prefs.getString(SOUNDPATH, null);
-        Uri sound = Uri.parse(soundpath);
-        Log.d(LOG_TAG, sound.toString());
-        mBuilder.setSound(sound);
-       
+        if (soundname == null) {
+            soundname = extras.getString(SOUND);
+        }
+        if (soundname != null && !soundname.contentEquals(SOUND_DEFAULT)) {
+            Uri sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
+                    + "://" + context.getPackageName() + "/raw/" + soundname);
+            Log.d(LOG_TAG, sound.toString());
+            mBuilder.setSound(sound);
+        } else {
+            mBuilder.setSound(android.provider.Settings.System.DEFAULT_NOTIFICATION_URI);
+        }
     }
 
     private void setNotificationLedColor(Bundle extras, NotificationCompat.Builder mBuilder) {
