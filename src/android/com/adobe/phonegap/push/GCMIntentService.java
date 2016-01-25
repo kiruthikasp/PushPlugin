@@ -17,6 +17,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import java.util.Timer;
+import java.util.TimerTask;
 import android.support.v4.app.NotificationCompat;
 import android.text.Html;
 import android.util.Log;
