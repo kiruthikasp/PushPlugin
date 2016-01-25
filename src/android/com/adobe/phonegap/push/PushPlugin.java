@@ -225,7 +225,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
         return true;
     }
    
-@Override
+
  public void onActivityResult( int requestCode,  int resultCode,  Intent intent, CallbackContext callbackContext)
  {
      SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
@@ -239,7 +239,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
               SharedPreferences.Editor editor = sharedPref.edit();
               editor.putString("soundpath",str);
               editor.commit();
-              this.callbackContext.success(str);
+              callbackContext.success(str);
           }
       }            
   }
