@@ -248,7 +248,6 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         SharedPreferences prefs = context.getSharedPreferences(PushPlugin.COM_ADOBE_PHONEGAP_PUSH, Context.MODE_PRIVATE);
         String localIcon = prefs.getString(ICON, null);
         String localIconColor = prefs.getString(ICON_COLOR, null);
-        String soundpath = prefs.getString(SOUNDPATH, null);
         boolean soundOption = prefs.getBoolean(SOUND, true);
         boolean vibrateOption = prefs.getBoolean(VIBRATE, true);
         Log.d(LOG_TAG, "stored icon=" + localIcon);
