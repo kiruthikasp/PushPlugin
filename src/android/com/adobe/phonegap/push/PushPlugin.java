@@ -213,8 +213,8 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             this.cordova.getActivity().startActivityForResult(intent, 999);
-             Toast.makeText(this.cordova.getActivity().getApplicationContext(),"called",
-             4000).show();
+             //Toast.makeText(this.cordova.getActivity().getApplicationContext(),"called",
+             //4000).show();
         } catch (UnknownError e) {
             callbackContext.error(e.getMessage());
         } 
@@ -234,10 +234,10 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
      if ( requestCode == 999)
      {
           Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+          String str = uri.toString();
          Toast.makeText(this.cordova.getActivity().getApplicationContext(), uri.toString(),
          4000).show();
-          if(uri != null){
-              String str = uri.toString();
+          if(str != null){
               Context context=this.cordova.getActivity().getApplicationContext();
               SharedPreferences.Editor editor = sharedPref.edit();
               editor.putString("soundpath",str);
