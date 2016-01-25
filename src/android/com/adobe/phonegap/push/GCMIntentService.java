@@ -20,6 +20,7 @@ import android.support.v4.app.NotificationCompat;
 import android.text.Html;
 import android.util.Log;
 import android.media.RingtoneManager;
+import android.media.Ringtone;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import org.json.JSONArray;
