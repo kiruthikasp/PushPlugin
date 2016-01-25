@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.database.Cursor;
 import android.view.Menu;
 import java.lang.NullPointerException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.iid.InstanceID;
