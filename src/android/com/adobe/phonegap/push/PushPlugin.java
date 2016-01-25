@@ -222,7 +222,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             if(s != null){
             Uri u = Uri.parse(s);
             Ringtone r=RingtoneManager.getRingtone(this, u); 
-            String st = r.getTitle(this));
+            String st = r.getTitle(this);
             callbackContext.success(st);
             }
             callbackContext.success();
