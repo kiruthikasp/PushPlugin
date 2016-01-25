@@ -19,7 +19,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.text.Html;
 import android.util.Log;
-
+import android.media.RingtoneManager;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import org.json.JSONArray;
@@ -473,6 +473,8 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
             Uri sound = Uri.parse(path);
             Log.d(LOG_TAG, sound.toString());
             mBuilder.setSound(sound);
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), sound);
+            r.play();
         } else {
             mBuilder.setSound(android.provider.Settings.System.DEFAULT_NOTIFICATION_URI);
         }
