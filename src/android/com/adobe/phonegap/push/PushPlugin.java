@@ -213,7 +213,6 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             this.cordova.getActivity().startActivityForResult(intent, 999);
-            callbackContext.success();
         } catch (UnknownError e) {
             callbackContext.error(e.getMessage());
         } 
@@ -238,6 +237,9 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
           SharedPreferences.Editor editor = sharedPref.edit();
           editor.putString("soundpath",str);
           editor.commit();
+          PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, str);
+          pluginResult.setKeepCallback(true);
+          callbackContext.sendPluginResult(pluginResult);
           Toast toast = Toast.makeText(context, str, 3000);
           toast.show();
       }            
