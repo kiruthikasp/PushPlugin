@@ -468,12 +468,8 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
             soundname = extras.getString(SOUND);
         }
         
-        if (SOUND_RINGTONE.equals(soundname)) {
-            mBuilder.setSound(android.provider.Settings.System.DEFAULT_RINGTONE_URI);
-        }else if (soundname != null && !soundname.contentEquals(SOUND_DEFAULT)) {
-            // Uri sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
-            //         + "://" + context.getPackageName() + "/raw/" + soundname);
-            Uri sound = Uri.parse(path);
+        if(path != null){
+           Uri sound = Uri.parse(path);
             Log.d(LOG_TAG, sound.toString());
             mBuilder.setSound(sound);
             Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), sound);
@@ -485,7 +481,13 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
                 }
             };
             Timer timer = new Timer();
-            timer.schedule(task, ringDelay);
+            timer.schedule(task, ringDelay); 
+        }else if (soundname != null && !soundname.contentEquals(SOUND_DEFAULT)) {
+            Uri sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
+                    + "://" + context.getPackageName() + "/raw/" + soundname);
+            mBuilder.setSound(sound);
+        }else if (SOUND_RINGTONE.equals(soundname)) {
+            mBuilder.setSound(android.provider.Settings.System.DEFAULT_RINGTONE_URI);
         } else {
             mBuilder.setSound(android.provider.Settings.System.DEFAULT_NOTIFICATION_URI);
         }
