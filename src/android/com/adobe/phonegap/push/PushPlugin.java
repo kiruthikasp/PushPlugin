@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.database.Cursor;
 import android.view.Menu;
+import java.lang.NullPointerException;
 
 import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.iid.InstanceID;
@@ -233,16 +234,22 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
      SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
      if ( requestCode == 999)
      {
+         try{
           Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-          String str = uri.toString();
-         Toast.makeText(this.cordova.getActivity().getApplicationContext(), uri.toString(),
-         4000).show();
-          if(str != null){
+          
+          if(uri != null){
+              String str = uri.toString();
               Context context=this.cordova.getActivity().getApplicationContext();
               SharedPreferences.Editor editor = sharedPref.edit();
               editor.putString("soundpath",str);
               editor.commit();
+          }else{
+             Toast.makeText(this.cordova.getActivity().getApplicationContext(), "No Ringtone Path Found!", 2500).show(); 
           }
+         }catch(NullPointerException e){
+             Toast.makeText(this.cordova.getActivity().getApplicationContext(), "No Ringtone Selected!", 2500).show(); 
+         }
+         }
       }            
   }
     public static void sendEvent(JSONObject _json) {
