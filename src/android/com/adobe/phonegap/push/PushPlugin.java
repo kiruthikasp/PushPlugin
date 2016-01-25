@@ -226,7 +226,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
     }
    
 
- public void onActivityResult( int requestCode,  int resultCode,  Intent intent, CallbackContext callbackContext)
+ public void onActivityResult( int requestCode,  int resultCode,  Intent intent)
  {
      SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
      if ( requestCode == 999)
@@ -239,8 +239,9 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
               SharedPreferences.Editor editor = sharedPref.edit();
               editor.putString("soundpath",str);
               editor.commit();
-              callbackContext.success(str);
+              return str;
           }
+          return false;
       }            
   }
     public static void sendEvent(JSONObject _json) {
