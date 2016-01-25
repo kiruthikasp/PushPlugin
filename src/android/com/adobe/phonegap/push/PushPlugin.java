@@ -226,7 +226,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
     }
    
 
- public void onActivityResult( int requestCode,  int resultCode,  Intent intent)
+ public static onActivityResult( int requestCode,  int resultCode,  Intent intent)
  {
      SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
      if ( requestCode == 999)
