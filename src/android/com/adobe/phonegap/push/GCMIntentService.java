@@ -16,6 +16,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import java.util.Timer;
 import android.support.v4.app.NotificationCompat;
 import android.text.Html;
 import android.util.Log;
@@ -461,6 +462,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         String soundname = extras.getString(SOUNDNAME);
         SharedPreferences prefs = getSharedPreferences(PushPlugin.MY_PREFS_NAME, MODE_PRIVATE); 
         String path = prefs.getString("soundpath", null);
+        long ringDelay = 3500;
         // String soundpath = extras.getString(SOUNDPATH);
         if (soundname == null) {
             soundname = extras.getString(SOUND);
@@ -476,6 +478,14 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
             mBuilder.setSound(sound);
             Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), sound);
             r.play();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    r.stop();
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(task, ringDelay);
         } else {
             mBuilder.setSound(android.provider.Settings.System.DEFAULT_NOTIFICATION_URI);
         }
