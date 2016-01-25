@@ -239,7 +239,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
               SharedPreferences.Editor editor = sharedPref.edit();
               editor.putString("soundpath",str);
               editor.commit();
-              callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, str));
+              this.callbackContext.success(str);
           }
       }            
   }
