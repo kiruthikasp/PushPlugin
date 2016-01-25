@@ -249,8 +249,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
          }catch(NullPointerException e){
              Toast.makeText(this.cordova.getActivity().getApplicationContext(), "No Ringtone Selected!", 2500).show(); 
          }
-         }
-      }            
+     }
   }
     public static void sendEvent(JSONObject _json) {
         PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, _json);
