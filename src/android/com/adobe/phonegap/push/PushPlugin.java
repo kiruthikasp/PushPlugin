@@ -44,6 +44,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
     private static CordovaWebView gWebView;
     private static Bundle gCachedExtras = null;
     private static boolean gForeground = false;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     /**
      * Gets the application context from cordova's main activity.
@@ -228,7 +229,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
 @Override
  public void onActivityResult( int requestCode,  int resultCode,  Intent intent)
  {
-     SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(COM_ADOBE_PHONEGAP_PUSH, Context.MODE_PRIVATE);
+     SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
      if ( requestCode == 999)
      {
           Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
