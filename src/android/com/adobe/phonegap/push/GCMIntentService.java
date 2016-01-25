@@ -457,7 +457,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
 
    private void setNotificationSound(Context context, Bundle extras, NotificationCompat.Builder mBuilder) {
         String soundname = extras.getString(SOUNDNAME);
-        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE); 
+        SharedPreferences prefs = getSharedPreferences(PushPlugin.MY_PREFS_NAME, MODE_PRIVATE); 
         String soundpath = prefs.getString(SOUNDPATH, null);
         Toast toast = Toast.makeText(context, soundpath, 3000);
         toast.show();
