@@ -214,10 +214,9 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             this.cordova.getActivity().startActivityForResult(intent, 999);
-            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
-            String s = sharedPref.getString("soundpath",null);
-            Uri u = Uri.parse(s);
-            callbackContext.success(u);
+            // SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
+            // String s = sharedPref.getString("soundpath",null);
+            // callbackContext.success(s);
              //Toast.makeText(this.cordova.getActivity().getApplicationContext(),"called",
              //4000).show();
         } catch (UnknownError e) {
@@ -233,7 +232,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
     }
    
 
- public void onActivityResult( int requestCode,  int resultCode,  Intent intent)
+ public void onActivityResult( int requestCode,  int resultCode,  Intent intent, CallbackContext callbackContext)
  {
      SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
      if ( requestCode == 999)
@@ -247,6 +246,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
               SharedPreferences.Editor editor = sharedPref.edit();
               editor.putString("soundpath",str);
               editor.commit();
+              callbackContext.success(str)
           }else{
              Toast.makeText(this.cordova.getActivity().getApplicationContext(), "No Ringtone Path Found!", 2500).show(); 
           }
