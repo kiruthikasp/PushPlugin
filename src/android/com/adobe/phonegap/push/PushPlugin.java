@@ -221,9 +221,10 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
             String s = sharedPref.getString("soundpath",null);
             if(s != null){
-            Ringtone r=RingtoneManager.getRingtone(this.cordova.getActivity().getApplicationContext(), s); 
-            String st = r.getTitle(this);
-            callbackContext.success(st);
+            Uri ringtoneUri = Uri.parse(s);
+            Ringtone ringtone = RingtoneManager.getRingtone(this.cordova.getActivity().getApplicationContext(), ringtoneUri);
+            String name = ringtone.getTitle(this.cordova.getActivity().getApplicationContext())
+            callbackContext.success(name);
             }
             callbackContext.success();
             //  Toast.makeText(this.cordova.getActivity().getApplicationContext(),"called",
