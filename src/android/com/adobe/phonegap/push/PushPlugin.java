@@ -246,7 +246,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
               SharedPreferences.Editor editor = sharedPref.edit();
               editor.putString("soundpath",str);
               editor.commit();
-              callbackContext.success(str)
+              callbackContext.success(str);
           }else{
              Toast.makeText(this.cordova.getActivity().getApplicationContext(), "No Ringtone Path Found!", 2500).show(); 
           }
