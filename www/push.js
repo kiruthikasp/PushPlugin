@@ -136,7 +136,7 @@ PushNotification.prototype.getApplicationIconBadgeNumber = function(successCallb
  * Get the application icon badge
  */
 
-PushNotification.prototype.select = function(successCallback, errorCallback) {
+PushNotification.prototype.select = function(successCallback, errorCallback,data) {
     if (!errorCallback) { errorCallback = function() {}; }
 
     if (typeof errorCallback !== 'function')  {
@@ -149,7 +149,7 @@ PushNotification.prototype.select = function(successCallback, errorCallback) {
         return;
     }
 
-    exec(successCallback, errorCallback, 'PushNotification', 'select',[]);
+    exec(successCallback, errorCallback, 'PushNotification', 'select',[data]);
 };
 
 /**
