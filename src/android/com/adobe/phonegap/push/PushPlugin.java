@@ -223,7 +223,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             if(s != null){
             Uri ringtoneUri = Uri.parse(s);
             Ringtone ringtone = RingtoneManager.getRingtone(this.cordova.getActivity().getApplicationContext(), ringtoneUri);
-            String name = ringtone.getTitle(this.cordova.getActivity().getApplicationContext())
+            String name = ringtone.getTitle(this.cordova.getActivity().getApplicationContext());
             callbackContext.success(name);
             }
             callbackContext.success();
