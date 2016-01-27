@@ -195,8 +195,8 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             String name = ringtone.getTitle(this.cordova.getActivity().getApplicationContext());
             callbackContext.success(name);
             }
-            }catch(NullPointerException e){
-              callbackContext.error(e);  
+            }catch(UnknownError e){
+             callbackContext.error(e.getMessage());
             }
         } else if (HAS_PERMISSION.equals(action)) {
             cordova.getThreadPool().execute(new Runnable() {
