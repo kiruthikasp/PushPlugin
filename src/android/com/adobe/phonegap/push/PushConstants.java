@@ -11,6 +11,7 @@ public interface PushConstants {
     public static final String ICON_COLOR = "iconColor";
     public static final String SOUND = "sound";
     public static final String SOUNDPATH = "soundpath";
+    public static final String TONE = "tone";
     public static final String SOUND_DEFAULT = "default";
     public static final String SOUND_RINGTONE = "ringtone";
     public static final String VIBRATE = "vibrate";
