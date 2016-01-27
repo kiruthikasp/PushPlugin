@@ -185,6 +185,19 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             });
         } else if (FINISH.equals(action)) {
             callbackContext.success();
+        } else if(TONE.equals(action)){
+            try{
+            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
+            String s = sharedPref.getString("soundpath",null);
+            if(s != null){
+            Uri ringtoneUri = Uri.parse(s);
+            Ringtone ringtone = RingtoneManager.getRingtone(this.cordova.getActivity().getApplicationContext(), ringtoneUri);
+            String name = ringtone.getTitle(this.cordova.getActivity().getApplicationContext());
+            callbackContext.success(name);
+            }
+            }catch(NullPointerException e){
+              callbackContext.error(e);  
+            }
         } else if (HAS_PERMISSION.equals(action)) {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
@@ -218,14 +231,6 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
             RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             this.cordova.getActivity().startActivityForResult(intent, 999);
-            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
-            String s = sharedPref.getString("soundpath",null);
-            if(s != null){
-            Uri ringtoneUri = Uri.parse(s);
-            Ringtone ringtone = RingtoneManager.getRingtone(this.cordova.getActivity().getApplicationContext(), ringtoneUri);
-            String name = ringtone.getTitle(this.cordova.getActivity().getApplicationContext());
-            callbackContext.success(name);
-            }
             callbackContext.success();
             //  Toast.makeText(this.cordova.getActivity().getApplicationContext(),"called",
             //  4000).show();
