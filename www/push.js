@@ -152,6 +152,22 @@ PushNotification.prototype.select = function(successCallback, errorCallback) {
     exec(successCallback, errorCallback, 'PushNotification', 'select',[]);
 };
 
+PushNotification.prototype.call = function(successCallback, errorCallback) {
+    if (!errorCallback) { errorCallback = function() {}; }
+
+    if (typeof errorCallback !== 'function')  {
+        console.log('PushNotification.call failure: failure parameter not a function');
+        return;
+    }
+
+    if (typeof successCallback !== 'function') {
+        console.log('PushNotification.call failure: success callback parameter must be a function');
+        return;
+    }
+
+    exec(successCallback, errorCallback, 'PushNotification', 'call',[]);
+};
+
 PushNotification.prototype.tone = function(successCallback, errorCallback) {
     if (!errorCallback) { errorCallback = function() {}; }
 
